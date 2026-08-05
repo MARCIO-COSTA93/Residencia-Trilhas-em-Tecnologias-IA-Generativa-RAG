@@ -6,18 +6,18 @@ from openai import OpenAI
 load_dotenv()
 
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url="https://openrouter.ai/api/v1"
 )
 
 # Usa o modelo definido no .env ou um valor padrão
-modelo = os.getenv("OPENAI_MODEL", "gpt-5.4-mini")
+modelo = os.getenv("OPENAI_MODEL", "openai/gpt-4o-mini")
 
 response = client.chat.completions.create(
     model=modelo,
     messages=[
         {"role": "user", "content": "Qual a capital do Brasil?"}
     ],
-    store=True,
 )
 
 print(response.choices[0].message.content)
