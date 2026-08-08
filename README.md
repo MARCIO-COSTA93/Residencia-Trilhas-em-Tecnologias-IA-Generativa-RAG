@@ -4,7 +4,7 @@ Este projeto contém o código inicial para interagir com a API da OpenAI utiliz
 
 Para garantir a eficiência de recursos e o isolamento das dependências, recomendamos fortemente o uso de um Ambiente Virtual Python (Virtual Environment ou `venv`).
 
-## 🚀 Passo a Passo para Configuração e Execução
+##  Passo a Passo para Configuração e Execução
 
 ### 1. Criar o Ambiente Virtual (venv)
 Abra o seu terminal na pasta raiz do projeto (`/IA`) e execute o seguinte comando para criar o ambiente virtual:
