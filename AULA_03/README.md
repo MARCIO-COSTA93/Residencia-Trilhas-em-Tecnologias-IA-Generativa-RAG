@@ -162,6 +162,8 @@ v
 
 3. Visualizacao 3D: os vetores reduzidos foram plotados em um grafico 3D, coloridos por categoria, permitindo observar visualmente como palavras de significado semelhante tendem a ficar mais proximas no espaco vetorial.
 
+![Gráfico 3D dos embeddings via PCA](grafico_embeddings_3d.png)
+
 ### Otimizacoes aplicadas
 
 - Chamada unica a API: em vez de gerar um embedding por palavra (9 chamadas), todas as palavras foram enviadas em uma unica requisicao, reduzindo overhead de rede.
@@ -216,66 +218,4 @@ Frase ancora: "O cachorro correu no parque e brincou com a bola."
 
 - A frase totalmente fora do dominio (juros do banco central) ficou com a menor similaridade, quase nula.
 
-- Ponto de atencao: a frase de **negacao** ("Nenhum animal esteve no parque e o cao permaneceu preso em casa") ficou com similaridade maior do que a frase apenas "relacionada" (gato dormindo no sofa). Isso evidencia uma limitacao conhecida de embeddings: eles tendem a capturar o **topico/vocabulario compartilhado** da frase mais do que a **logica de negacao** propriamente dita.
-
-## Tarefa C - Busca Semantica Manual (RAG simples)
-
-### O que foi feito
-
-Implementada uma busca semantica manual sobre os arquivos `.md` gerados na Aula 2 (`twitter_algoritmo.md`, `escrita_academica_ia.md`, `bioetica_e_ia.md`), comparando 3 niveis de granularidade de divisao do texto:
-
-1. **Por linha**: cada linha nao-vazia do arquivo vira um trecho (507 trechos).
-
-2. **Por paragrafo**: o texto e dividido por linha em branco dupla (`\n\n`), com um filtro de tamanho minimo (80 caracteres) para remover ruido de conversao de PDF (numeros de pagina, marcadores de imagem, titulos soltos) (268 trechos).
-
-3. **Por capitulo/secao**: o texto e dividido pelos titulos de secao (`## `), com filtro de tamanho minimo (100 caracteres) (58 trechos).
-
-Para cada granularidade, os textos foram convertidos em embeddings (em blocos de 50 para nao estourar o limite da API) e uma funcao `buscar_top_k()` foi criada para:
-
-- Gerar o embedding da query de busca.
-
-- Calcular a similaridade de cosseno entre a query e cada trecho.
-
-- Ordenar e retornar os top K trechos mais similares.
-
-### Resultado comparativo (mesma query nos 3 niveis)
-
-Query: "Como a inteligencia artificial pode ajudar no diagnostico medico?"
-
-- **Por linha e por paragrafo** (resultado identico nesse documento): retornam a frase isolada mais proxima em significado, com o maior score de similaridade (0.5516), mas pouco contexto ao redor.
-
-- **Por capitulo**: retorna o paragrafo de Resumo inteiro do artigo (score 0.5068, ligeiramente menor), trazendo bem mais contexto e legibilidade - inclusive trouxe as 3 versoes do resumo (portugues, espanhol e ingles) como resultados no top 3.
-
-### Conclusao / trade-off observado
-
-Existe um trade-off classico de sistemas RAG entre tamanho do chunk (trecho) e qualidade da resposta:
-
-- **Chunks pequenos** (linha) tendem a ter scores de similaridade mais altos, pois sao mais "concentrados" em poucas palavras-chave especificas da query, mas entregam pouco contexto para quem le o resultado.
-
-- **Chunks grandes** (capitulo) diluem um pouco a similaridade (porque misturam frases relevantes com outras menos relevantes dentro do mesmo bloco), mas entregam uma resposta muito mais completa e util.
-
-- No caso especifico dos arquivos usados (extraidos de PDF academico), "linha" e "paragrafo" praticamente coincidiram, pois o processo de conversao ja isola cada frase por linha em branco - a diferenca de granularidade so ficou evidente na comparacao com "capitulo".
-
-## Conceitos aprendidos
-
-- O que e um embedding e por que ele e util
-
-- Como gerar embeddings via API (OpenRouter), em chamada unica e em lote/blocos
-
-- Consumo de tokens em chamadas de embedding
-
-- Reducao de dimensionalidade com PCA
-
-- Visualizacao de dados de alta dimensao
-
-- Distancia euclidiana e similaridade/distancia de cosseno como metricas de comparacao de vetores
-
-- Limitacoes de embeddings ao lidar com palavras isoladas e com negacao
-
-- Busca semantica manual (RAG simples): chunking, geracao de embeddings, ranking por similaridade
-
-- Trade-off entre granularidade do chunk (linha, paragrafo, capitulo) e qualidade/contexto do resultado retornado
-
-## Como sair do Ambiente Virtual?
-
-deactivate
+- Ponto de atencao: a frase de **negacao** ("Nenhum animal esteve no parque e o cao permaneceu preso em casa") ficou com similaridade maior do que a frase apenas "relacionada" (gato dormindo no
