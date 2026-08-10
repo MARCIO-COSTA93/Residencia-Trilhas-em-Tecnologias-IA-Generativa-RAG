@@ -1,216 +1,131 @@
-\# Introducao a IA - Aula 03
+# 🎙️ Speech Transcription & Audio Analysis
 
+A complete pipeline for **speech-to-text transcription** with audio preprocessing, data augmentation, and visual analysis — built as a foundation for Keyword Spotting (KWS) and Automatic Speech Recognition (ASR) systems.
 
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://tensorflow.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Este projeto contem exercicios praticos sobre Embeddings - representacoes vetoriais de texto usadas em busca semantica e sistemas de Retrieval-Augmented Generation (RAG).
+---
 
+## Overview
 
+This project demonstrates a production-oriented audio preprocessing and transcription pipeline using the `SpeechRecognition` library, with techniques directly applicable to real-world voice assistant and keyword detection systems.
 
-\## Estrutura do Projeto
+### Key Features
 
+- **Multi-format support**: WAV, OGG, OPUS, MP3, FLAC (including WhatsApp voice messages)
+- **Ambient noise adjustment**: Calibrates energy threshold for robust recognition in noisy environments
+- **Data augmentation**: Gaussian noise injection, time stretching, and pitch shifting
+- **Visual analysis**: Waveform and spectrogram visualization before/after preprocessing
+- **Engine comparison**: Online (Google Web Speech API) vs offline (CMU Sphinx) recognition
+- **Batch processing**: Transcribe entire directories of audio files automatically
 
+---
 
-AULA\_03/
+## Why This Matters for KWS Systems
 
-├── README.md              # Este arquivo
+Understanding how raw audio is preprocessed and transcribed is foundational for building **Keyword Spotting (KWS)** pipelines. Key concepts demonstrated here:
 
-└── Aula\_03\_a.ipynb        # Tarefa A: Geracao e visualizacao de embeddings
+| Concept | KWS Application |
+|---|---|
+| 16kHz resampling | Standard input for most KWS/ASR neural networks |
+| Noise calibration | Reduces false positives in always-on detection |
+| Spectrogram generation | Visual representation processed by CNNs/RNNs |
+| Data augmentation | Improves model robustness to real-world conditions |
+| Offline vs online | Edge deployment trade-offs for embedded KWS |
 
+---
 
+## Technical Stack
 
-\## Passo a Passo para Configuracao e Execucao
+- **Speech Recognition**: SpeechRecognition (Google Web Speech API, CMU Sphinx)
+- **Audio Processing**: librosa, soundfile, pydub
+- **Data Augmentation**: audiomentations
+- **Visualization**: matplotlib, librosa.display
+- **Format Conversion**: ffmpeg, pydub
 
+---
 
+## Installation
 
-\### 1. Ativar o Ambiente Virtual
+```bash
+git clone https://github.com/MARCIO-COSTA93/speech-transcription.git
+cd speech-transcription
 
+pip install -r requirements.txt
+apt-get install -y ffmpeg
+```
 
+---
 
-\# No Linux/macOS
+## Usage
 
-source venv/bin/activate
+Open the notebook in Google Colab:
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com)
 
+Or run locally:
 
-\# No Windows
+```bash
+jupyter notebook speech_transcription.ipynb
+```
 
-venv\\Scripts\\activate
+### Quick Example
 
+```python
+# Transcribe any audio file
+result = process_audio_file('audio.ogg', language='pt-BR')
 
+# Batch transcribe WhatsApp voice messages
+results = transcribe_whatsapp_messages('/path/to/audios/', language='pt-BR')
 
-\### 2. Instalar as Dependencias
+# Compare recognition engines
+google_result, sphinx_result = compare_engines('audio.wav')
 
+# Analyze effect of noise adjustment
+noise_adjustment_comparison('audio.wav', language='pt-BR')
+```
 
+---
 
-pip install openai scikit-learn matplotlib numpy
+## Project Structure
 
+```
+speech-transcription/
+├── speech_transcription.ipynb   # Main notebook
+├── requirements.txt             # Dependencies
+└── README.md                    # This file
+```
 
+---
 
-\## Tarefa A - Geracao e Visualizacao de Embeddings
+## Key Observations
 
+**Noise adjustment is critical**: Ambient noise calibration significantly reduces false positives — the same principle applies to always-on KWS systems where background noise triggers are a key challenge.
 
+**Online vs Offline trade-offs**:
+- Google Web Speech API: high accuracy, requires internet, ~500ms latency
+- CMU Sphinx: lower accuracy, fully offline, suitable for embedded devices
 
-Arquivo: Aula\_03\_a.ipynb
+**Data augmentation improves robustness**: Models and pipelines trained/tested with augmented data (noise, speed variations) generalize better to unseen real-world conditions.
 
+---
 
+## Related Projects
 
-\### Arquitetura do Codigo
+- [Audio Keyword Detector](https://github.com/MARCIO-COSTA93/audio-keyword-detector) — YAMNet-based acoustic event classification with sliding window analysis
 
+---
 
+## Author
 
-┌─────────────────────────────────────────────┐
+**Marcio da Costa Oliveira**  
+- LinkedIn: [marcio-costa-oliveira](https://linkedin.com/in/marcio-costa-oliveira)  
+- GitHub: [MARCIO-COSTA93](https://github.com/MARCIO-COSTA93)
 
-│              Aula\_03\_a.ipynb                 │
+---
 
-├─────────────────────────────────────────────┤
+## License
 
-│                                               │
-
-│  1. Configuracao                             │
-
-│     - client (OpenAI -> OpenRouter)          │
-
-│                                               │
-
-│  2. Funcoes                                  │
-
-│     - gerar\_embeddings\_em\_lote()             │
-
-│       entrada: lista de textos               │
-
-│       saida: vetores + tokens gastos         │
-
-│                                               │
-
-│     - reduzir\_dimensoes()                    │
-
-│       entrada: vetores (2048D)               │
-
-│       saida: coordenadas (3D) via PCA        │
-
-│                                               │
-
-│     - plotar\_grafico\_3d()                    │
-
-│       entrada: coordenadas + categorias      │
-
-│       saida: grafico 3D com legenda          │
-
-│                                               │
-
-│  3. Execucao                                 │
-
-│     palavras -> embeddings -> PCA -> grafico │
-
-│                                               │
-
-└─────────────────────────────────────────────┘
-
-
-
-\### Fluxo de dados
-
-
-
-"gato", "carro", "banana"...
-
-&#x20;       |
-
-&#x20;       v
-
-+--------------------+
-
-|  OpenRouter API     |  (nvidia/nemotron-3-embed-1b:free)
-
-+--------------------+
-
-&#x20;       |
-
-&#x20;       v
-
-&#x20;  Vetores 2048D
-
-&#x20;       |
-
-&#x20;       v
-
-+--------------------+
-
-|       PCA           |  (reduz para 3 dimensoes)
-
-+--------------------+
-
-&#x20;       |
-
-&#x20;       v
-
-&#x20;  Coordenadas 3D
-
-&#x20;       |
-
-&#x20;       v
-
-+--------------------+
-
-|   Matplotlib 3D      |  (grafico com legenda por categoria)
-
-+--------------------+
-
-
-
-\### O que foi feito
-
-
-
-1\. Geracao de embeddings: utilizando o modelo gratuito nvidia/nemotron-3-embed-1b:free via OpenRouter, foram gerados vetores de 2048 dimensoes para 9 palavras de 3 categorias diferentes:
-
-&#x20;  - Animais: gato, felino, cachorro
-
-&#x20;  - Veiculos: carro, caminhao, moto
-
-&#x20;  - Frutas: banana, maca, goiaba
-
-
-
-2\. Reducao de dimensionalidade: como nao e possivel visualizar 2048 dimensoes diretamente, foi utilizado o algoritmo PCA (Principal Component Analysis) para reduzir os vetores a 3 dimensoes, preservando ao maximo as relacoes de distancia entre eles.
-
-
-
-3\. Visualizacao 3D: os vetores reduzidos foram plotados em um grafico 3D, coloridos por categoria, permitindo observar visualmente como palavras de significado semelhante tendem a ficar mais proximas no espaco vetorial.
-
-
-
-\### Otimizacoes aplicadas
-
-
-
-\- Chamada unica a API: em vez de gerar um embedding por palavra (9 chamadas), todas as palavras foram enviadas em uma unica requisicao, reduzindo overhead de rede.
-
-\- Codigo modularizado em funcoes, com docstrings documentando parametros e retornos.
-
-
-
-\### Conceitos aprendidos
-
-
-
-\- O que e um embedding e por que ele e util
-
-\- Como gerar embeddings via API (OpenRouter)
-
-\- Consumo de tokens em chamadas de embedding
-
-\- Reducao de dimensionalidade com PCA
-
-\- Visualizacao de dados de alta dimensao
-
-
-
-\## Como sair do Ambiente Virtual?
-
-
-
-deactivate
-
-
-
+MIT License - Free for educational and commercial use.
