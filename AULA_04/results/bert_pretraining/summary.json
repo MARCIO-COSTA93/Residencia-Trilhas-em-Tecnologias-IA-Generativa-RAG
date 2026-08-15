@@ -1,0 +1,29 @@
+{
+  "document": "bert_pretraining.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 193,
+      "avg_chunk_size": 351.4,
+      "min_chunk_size": 28,
+      "max_chunk_size": 499,
+      "total_tokens": 19335,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 31,
+      "avg_chunk_size": 2090.3,
+      "min_chunk_size": 69,
+      "max_chunk_size": 11550,
+      "total_tokens": 18249,
+      "embedding_dimension": 2048
+    }
+  ]
+}

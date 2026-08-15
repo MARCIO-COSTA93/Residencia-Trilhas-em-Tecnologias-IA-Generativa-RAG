@@ -1,0 +1,29 @@
+{
+  "document": "scaling_laws_llm.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 284,
+      "avg_chunk_size": 343.9,
+      "min_chunk_size": 21,
+      "max_chunk_size": 499,
+      "total_tokens": 28929,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 22,
+      "avg_chunk_size": 3820.7,
+      "min_chunk_size": 241,
+      "max_chunk_size": 10790,
+      "total_tokens": 23605,
+      "embedding_dimension": 2048
+    }
+  ]
+}

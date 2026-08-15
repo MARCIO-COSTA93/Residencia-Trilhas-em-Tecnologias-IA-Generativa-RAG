@@ -1,0 +1,29 @@
+{
+  "document": "retrieval_augmented_generation.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 221,
+      "avg_chunk_size": 339.0,
+      "min_chunk_size": 1,
+      "max_chunk_size": 499,
+      "total_tokens": 21675,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 33,
+      "avg_chunk_size": 2185.5,
+      "min_chunk_size": 105,
+      "max_chunk_size": 6552,
+      "total_tokens": 20724,
+      "embedding_dimension": 2048
+    }
+  ]
+}

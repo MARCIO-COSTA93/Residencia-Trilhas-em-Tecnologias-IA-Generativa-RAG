@@ -1,0 +1,29 @@
+{
+  "document": "lora_low_rank_adaptation.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 269,
+      "avg_chunk_size": 344.4,
+      "min_chunk_size": 1,
+      "max_chunk_size": 499,
+      "total_tokens": 33002,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 42,
+      "avg_chunk_size": 2111.1,
+      "min_chunk_size": 87,
+      "max_chunk_size": 7550,
+      "total_tokens": 31256,
+      "embedding_dimension": 2048
+    }
+  ]
+}

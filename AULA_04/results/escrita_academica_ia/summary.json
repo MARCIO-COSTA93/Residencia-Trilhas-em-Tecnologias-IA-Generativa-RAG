@@ -1,0 +1,29 @@
+{
+  "document": "escrita_academica_ia.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 140,
+      "avg_chunk_size": 349.5,
+      "min_chunk_size": 30,
+      "max_chunk_size": 499,
+      "total_tokens": 13210,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 20,
+      "avg_chunk_size": 2294.8,
+      "min_chunk_size": 28,
+      "max_chunk_size": 6749,
+      "total_tokens": 12163,
+      "embedding_dimension": 2048
+    }
+  ]
+}

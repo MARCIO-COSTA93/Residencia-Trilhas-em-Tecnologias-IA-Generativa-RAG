@@ -1,0 +1,29 @@
+{
+  "document": "gpt3_language_models.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 750,
+      "avg_chunk_size": 362.7,
+      "min_chunk_size": 1,
+      "max_chunk_size": 499,
+      "total_tokens": 84214,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 87,
+      "avg_chunk_size": 2998.9,
+      "min_chunk_size": 149,
+      "max_chunk_size": 9821,
+      "total_tokens": 80347,
+      "embedding_dimension": 2048
+    }
+  ]
+}

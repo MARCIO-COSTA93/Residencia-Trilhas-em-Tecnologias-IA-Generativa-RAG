@@ -1,0 +1,29 @@
+{
+  "document": "gpt4_technical_report.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 847,
+      "avg_chunk_size": 359.0,
+      "min_chunk_size": 2,
+      "max_chunk_size": 499,
+      "total_tokens": 84383,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 136,
+      "avg_chunk_size": 2142.8,
+      "min_chunk_size": 35,
+      "max_chunk_size": 12152,
+      "total_tokens": 79929,
+      "embedding_dimension": 2048
+    }
+  ]
+}

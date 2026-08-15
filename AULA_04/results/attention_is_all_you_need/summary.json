@@ -1,0 +1,29 @@
+{
+  "document": "attention_is_all_you_need.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 120,
+      "avg_chunk_size": 360.4,
+      "min_chunk_size": 30,
+      "max_chunk_size": 499,
+      "total_tokens": 12139,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 26,
+      "avg_chunk_size": 1590.8,
+      "min_chunk_size": 58,
+      "max_chunk_size": 8519,
+      "total_tokens": 11504,
+      "embedding_dimension": 2048
+    }
+  ]
+}

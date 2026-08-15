@@ -1,0 +1,29 @@
+{
+  "document": "llama_foundation_models.md",
+  "experiments": [
+    {
+      "test_id": 9,
+      "strategy": "recursive",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "num_chunks": 264,
+      "avg_chunk_size": 356.1,
+      "min_chunk_size": 19,
+      "max_chunk_size": 499,
+      "total_tokens": 30885,
+      "embedding_dimension": 2048
+    },
+    {
+      "test_id": 10,
+      "strategy": "markdown_headers",
+      "chunk_size": null,
+      "chunk_overlap": null,
+      "num_chunks": 58,
+      "avg_chunk_size": 1547.5,
+      "min_chunk_size": 145,
+      "max_chunk_size": 4757,
+      "total_tokens": 29444,
+      "embedding_dimension": 2048
+    }
+  ]
+}
