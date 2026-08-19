@@ -34,6 +34,7 @@ Documentos → Extração (PDF parser, OCR, Pandas) → Limpeza → Metadados �
 
 Parte 4 – Metadados
 Documento:
+```json
 {
   "document_id": "reg_2026",
   "title": "Regulamento Geral 2026",
@@ -44,6 +45,8 @@ Documento:
   "updated_at": "2026-07-01",
   "category": "normativo"
 }
+```
+
 
 Chunk:
 {
