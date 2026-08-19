@@ -49,6 +49,7 @@ Documento:
 
 
 Chunk:
+```json
 {
   "document_id": "reg_2026",
   "chunk_id": "reg_2026-12",
@@ -59,6 +60,8 @@ Chunk:
   "valid_to": "2026-12-31",
   "text": "Artigo 12: Limite de R$200 por sessão"
 }
+```
+
 
 Parte 5 – Chunking / Splitting
 - Estratégia: dividir por seções semânticas.
