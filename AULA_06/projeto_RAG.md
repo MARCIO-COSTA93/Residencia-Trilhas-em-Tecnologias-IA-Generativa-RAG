@@ -174,7 +174,7 @@ Referências
 ------------------------------------------------------------
 Uso de IA
 ------------------------------------------------------------
-Utilizei a IA (Microsoft Copilot) como apoio na estruturação das etapas e na redação das propostas, assim como o Claud AI.
+Utilizei a IA (Microsoft Copilot) como apoio na estruturação das etapas e na redação das propostas.
 Busquei vídeos no YouTube e materiais técnicos sobre RAG para compreender melhor os conceitos.
 Avaliei criticamente cada resposta frente às fontes externas.
 A decisão sobre cada técnica levou em conta tempo, formatos de dados, criticidade quanto ao sigilo (LGPD) e custo.
