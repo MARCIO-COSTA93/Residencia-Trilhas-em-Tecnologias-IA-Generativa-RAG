@@ -113,11 +113,14 @@ Tamanho: regulamentos 30–50 páginas, ementas 2–5 páginas.
 Frequência: semestral/anual.
 
 Estrutura:
+```text
 documentos/
 ├── regulamentos/
 ├── ementas/
 ├── calendario/
 └── comunicados/
+```
+
 
 Parte 3 – Pipeline
 Mesma estrutura, menos OCR.
