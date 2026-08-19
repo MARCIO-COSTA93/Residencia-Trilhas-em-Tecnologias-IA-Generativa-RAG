@@ -18,13 +18,16 @@ Tamanho típico: regulamentos 50–100 páginas, circulares 5–20 páginas, rec
 Frequência: regulamentos anuais, circulares mensais/trimestrais, recibos diários.
 
 Estrutura de pastas:
-'''documentos/
+```text
+documentos/
 ├── regulamentos/
 ├── circulares/
 ├── tabelas/
 ├── recibos/
 └── faq/
-'''
+```
+
+
 
 Parte 3 – Pipeline de ingestão
 Documentos → Extração (PDF parser, OCR, Pandas) → Limpeza → Metadados → Chunking → Embeddings → Banco Vetorial
